@@ -15,6 +15,15 @@ function createButtons() {
         operatorsUI.appendChild(button);
     }
 
+    let button = document.createElement("button");
+    button.innerText = "AC";
+    button.addEventListener('click', (e) => {
+        e.stopPropagation();
+        buffer = [];
+        updateScreen(0);
+    });
+    operatorsUI.appendChild(button);
+
 
     const numbersUI = document.getElementById("numbers");
     for (let i = 0; i < 10; i++) {
