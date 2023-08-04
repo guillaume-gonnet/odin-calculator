@@ -29,6 +29,7 @@ function createButtons() {
     for (let i = 0; i < 10; i++) {
         let button = document.createElement("button");
         button.innerText = i;
+        button.setAttribute("id", `btn${i}`);
         button.addEventListener('click', (e) => {
             e.stopPropagation();
             buffer = updateBuffer(buffer, i);
@@ -88,4 +89,4 @@ function operate(a, ope, b) {
     }
 }
 
-// module.exports = updateBuffer;
+module.exports = updateBuffer;
