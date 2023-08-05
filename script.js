@@ -41,7 +41,7 @@ function createButtons() {
 
 function addEventListenerKeyboard() {
     window.addEventListener("keydown", (e) => {
-        e.stopPropagation();
+        e.preventDefault();
         let keyPressed = null;
         if (e.key >= 0 && e.key <= 9) {
             keyPressed = parseInt(e.key);
