@@ -216,3 +216,29 @@ test('Start with negative sign', () => {
     buffer = updateBuffer(buffer, "=");
     expect(buffer).toStrictEqual([3]);
 });
+
+test('All operators usage', () => {
+
+    document.body.innerHTML =
+        '< container > ' +
+        '<div id="screen"></div>' +
+        '<div id="operators"></div>' +
+        '<div id="numbers"></div>' +
+        '</container>';
+
+    const updateBuffer = require('../script');
+
+    let buffer = [];
+    buffer = updateBuffer(buffer, "-");
+    buffer = updateBuffer(buffer, 2);
+    buffer = updateBuffer(buffer, "+");
+    buffer = updateBuffer(buffer, 5);
+    buffer = updateBuffer(buffer, "*");
+    buffer = updateBuffer(buffer, 3);
+    buffer = updateBuffer(buffer, "-");
+    buffer = updateBuffer(buffer, 5);
+    buffer = updateBuffer(buffer, "/");
+    buffer = updateBuffer(buffer, 2);
+    buffer = updateBuffer(buffer, "=");
+    expect(buffer).toStrictEqual([10.5]);
+});

@@ -78,7 +78,7 @@ function updateBuffer(buff, el) {
     if (typeof el === "number") {
         if (typeof buff.at(-1) === "number") {
             buff.splice(-1, 1, buff.at(-1) * 10 + el);
-        } else if (buff.at(-1) === "-") {
+        } else if (buff.at(-1) === "-" && buff.length === 1) {
             buff.splice(0, 1, -el);
         } else {
             buff.push(el);
