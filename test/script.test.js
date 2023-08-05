@@ -196,3 +196,23 @@ test('Div by 0 should not error', () => {
     buffer = updateBuffer(buffer, "=");
     expect(buffer).toStrictEqual(["NaN"]);
 });
+
+test('Start with negative sign', () => {
+
+    document.body.innerHTML =
+        '< container > ' +
+        '<div id="screen"></div>' +
+        '<div id="operators"></div>' +
+        '<div id="numbers"></div>' +
+        '</container>';
+
+    const updateBuffer = require('../script');
+
+    let buffer = [];
+    buffer = updateBuffer(buffer, "-");
+    buffer = updateBuffer(buffer, 2);
+    buffer = updateBuffer(buffer, "+");
+    buffer = updateBuffer(buffer, 5);
+    buffer = updateBuffer(buffer, "=");
+    expect(buffer).toStrictEqual([3]);
+});

@@ -45,9 +45,8 @@ function updateScreen(num) {
 }
 
 function updateBuffer(buff, el) {
-
     if (buff.length === 0) {
-        if (typeof el === "number") {
+        if (typeof el === "number" || el === "-") {
             buff.push(el);
             updateScreen(buff[0]);
         }
@@ -57,13 +56,13 @@ function updateBuffer(buff, el) {
     if (typeof el === "number") {
         if (typeof buff.at(-1) === "number") {
             buff.splice(-1, 1, buff.at(-1) * 10 + el);
-            updateScreen(buff.at(-1));
-            return buff;
+        } else if (buff.at(-1) === "-") {
+            buff.splice(0, 1, -el);
         } else {
             buff.push(el);
-            updateScreen(buff.at(-1));
-            return buff;
         }
+        updateScreen(buff.at(-1));
+        return buff;
     } else if (el === "=") {
         while (buff.includes("*") || buff.includes("/")) {
             const index = Math.max(buff.indexOf("*"), buff.indexOf("/"));
@@ -76,7 +75,7 @@ function updateBuffer(buff, el) {
         updateScreen(buff.at(-1));
         return buff;
     } else { // el is an operator
-        if (operators.includes(buff.at(-1))) {
+        if (operators.includes(buff.at(-1))) { //2operators in a row, keep last
             buff.splice(-1, el);
         } else {
             buff.push(el);
@@ -85,8 +84,6 @@ function updateBuffer(buff, el) {
     }
 }
 
-
-// a is actually the second argument, and b the first
 function operate(a, ope, b) {
     switch (ope) {
         case "+":
