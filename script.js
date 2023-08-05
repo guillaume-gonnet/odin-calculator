@@ -2,6 +2,7 @@ let buffer = [];
 const operators = ["+", "-", "*", "/", "="];
 
 createButtons();
+addEventListenerKeyboard();
 
 function createButtons() {
     const operatorsUI = document.getElementById("operators");
@@ -36,6 +37,27 @@ function createButtons() {
         });
         numbersUI.appendChild(button);
     }
+}
+
+function addEventListenerKeyboard() {
+    window.addEventListener("keydown", (e) => {
+        e.stopPropagation();
+        let keyPressed = null;
+        if (e.key >= 0 && e.key <= 9) {
+            keyPressed = parseInt(e.key);
+        } else if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/" || e.key === "=") {
+            keyPressed = e.key;
+        } else if (e.key == "Delete") {
+            buffer = emptyBuffer(buffer);
+            return;
+        } else if (e.key === "Enter") {
+            keyPressed = "=";
+        } else {
+            console.log(`key ${e.key} transformed in ${keyPressed} with code ${e.code} is not a digit or operator`)
+            return;
+        }
+        buffer = updateBuffer(buffer, keyPressed);
+    });
 }
 
 function updateScreen(num) {
@@ -98,6 +120,12 @@ function operate(a, ope, b) {
             }
             return a / b;
     }
+}
+
+function emptyBuffer(buff) {
+    buff = [];
+    updateScreen(0);
+    return buff;
 }
 
 module.exports = updateBuffer;
