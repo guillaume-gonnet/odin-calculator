@@ -65,11 +65,17 @@ function updateBuffer(buff, el) {
             return buff;
         }
     } else if (el === "=") {
-        buff.push(operate(buff.pop(), buff.pop(), buff.pop()));
+        while (buff.length !== 1) {
+            buff.push(operate(buff.pop(), buff.pop(), buff.pop()));
+        }
         updateScreen(buff.at(-1));
         return buff;
-    } else {
-        buff.push(el);
+    } else { // is an operator
+        if (operators.includes(buff.at(-1))) {
+            buff.splice(-1, el);
+        } else {
+            buff.push(el);
+        }
         return buff;
     }
 }

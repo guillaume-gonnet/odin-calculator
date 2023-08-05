@@ -80,7 +80,7 @@ test('add 3 numbers', () => {
     buffer = updateBuffer(buffer, 3);
     buffer = updateBuffer(buffer, 1);
     buffer = updateBuffer(buffer, "=");
-    expect(buffer).toStrictEqual([604]);
+    expect(buffer).toStrictEqual([631]);
 });
 
 test('double sign +', () => {
