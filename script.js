@@ -65,12 +65,17 @@ function updateBuffer(buff, el) {
             return buff;
         }
     } else if (el === "=") {
+        while (buff.includes("*") || buff.includes("/")) {
+            const index = Math.max(buff.indexOf("*"), buff.indexOf("/"));
+            const newEl = operate(buff[index - 1], buff[index], buff[index + 1]);
+            buff.splice(index - 1, 3, newEl);
+        }
         while (buff.length !== 1) {
-            buff.push(operate(buff.pop(), buff.pop(), buff.pop()));
+            buff.splice(-3, 3, operate(buff.at(-3), buff.at(-2), buff.at(-1)));
         }
         updateScreen(buff.at(-1));
         return buff;
-    } else { // is an operator
+    } else { // el is an operator
         if (operators.includes(buff.at(-1))) {
             buff.splice(-1, el);
         } else {
@@ -87,11 +92,11 @@ function operate(a, ope, b) {
         case "+":
             return a + b;
         case "-":
-            return b - a;
+            return a - b;
         case "*":
             return a * b;
         case "/":
-            return b / a
+            return a / b;
     }
 }
 

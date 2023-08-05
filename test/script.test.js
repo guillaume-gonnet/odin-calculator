@@ -105,3 +105,56 @@ test('double sign +', () => {
     buffer = updateBuffer(buffer, "=");
     expect(buffer).toStrictEqual([600]);
 });
+
+test('Addition / Multiplication order', () => {
+
+    document.body.innerHTML =
+        '< container > ' +
+        '<div id="screen"></div>' +
+        '<div id="operators"></div>' +
+        '<div id="numbers"></div>' +
+        '</container>';
+
+    const updateBuffer = require('../script');
+
+    let buffer = [];
+    buffer = updateBuffer(buffer, 5);
+    buffer = updateBuffer(buffer, 2);
+    buffer = updateBuffer(buffer, "*");
+    buffer = updateBuffer(buffer, 7);
+    buffer = updateBuffer(buffer, "+");
+    buffer = updateBuffer(buffer, 2);
+    buffer = updateBuffer(buffer, "=");
+    expect(buffer).toStrictEqual([366]);
+});
+
+test('Addition / Multiplication order - Multiple', () => {
+
+    document.body.innerHTML =
+        '< container > ' +
+        '<div id="screen"></div>' +
+        '<div id="operators"></div>' +
+        '<div id="numbers"></div>' +
+        '</container>';
+
+    const updateBuffer = require('../script');
+
+    let buffer = [];
+    buffer = updateBuffer(buffer, 5);
+    buffer = updateBuffer(buffer, 2);
+    buffer = updateBuffer(buffer, "*");
+    buffer = updateBuffer(buffer, 7);
+    buffer = updateBuffer(buffer, "+");
+    buffer = updateBuffer(buffer, 2);
+    buffer = updateBuffer(buffer, "/");
+    buffer = updateBuffer(buffer, 2);
+    buffer = updateBuffer(buffer, "*");
+    buffer = updateBuffer(buffer, 7);
+    buffer = updateBuffer(buffer, 7);
+    buffer = updateBuffer(buffer, "+");
+    buffer = updateBuffer(buffer, 2);
+    buffer = updateBuffer(buffer, "/");
+    buffer = updateBuffer(buffer, 3);
+    buffer = updateBuffer(buffer, "=");
+    expect(buffer).toStrictEqual([441.6666666666667]);
+});
