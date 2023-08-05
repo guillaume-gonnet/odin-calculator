@@ -96,6 +96,9 @@ function operate(a, ope, b) {
         case "*":
             return a * b;
         case "/":
+            if (b === 0) {
+                return "NaN";
+            }
             return a / b;
     }
 }

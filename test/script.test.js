@@ -194,5 +194,5 @@ test('Div by 0 should not error', () => {
     buffer = updateBuffer(buffer, "/");
     buffer = updateBuffer(buffer, 0);
     buffer = updateBuffer(buffer, "=");
-    expect(buffer).toStrictEqual(["nan"]);
+    expect(buffer).toStrictEqual(["NaN"]);
 });
