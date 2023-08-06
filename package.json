@@ -1,14 +1,13 @@
 {
-    "scripts": {
-        "test": "jest"
-    },
     "devDependencies": {
-        "jest": "^29.6.2"
-    },
-    "dependencies": {
+        "jest": "^29.6.2",
         "jest-environment-jsdom": "^29.6.2"
     },
     "jest": {
         "verbose": true
+    },
+    "type": "module",
+    "scripts": {
+        "test": "node --experimental-vm-modules node_modules/.bin/jest"
     }
 }

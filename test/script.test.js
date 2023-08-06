@@ -1,244 +1,236 @@
-/**
- * @jest-environment jsdom
- */
+//const Buffer = require('../Buffer');
+import Buffer from '../Buffer.js';
 
-test('enter single digit number', () => {
+describe("Buffer", () => {
+    const buffer = new Buffer();
 
-    document.body.innerHTML =
-        '< container > ' +
-        '<div id="screen"></div>' +
-        '<div id="operators"></div>' +
-        '<div id="numbers"></div>' +
-        '</container>';
+    test('enter single digit number', () => {
+        buffer.update(5);
+        expect(buffer).toStrictEqual([5]);
+    });
 
-    const updateBuffer = require('../script');
+    test('enter 3 digits number', () => {
 
-    let buffer = [];
-    buffer = updateBuffer(buffer, 5);
-    expect(buffer).toStrictEqual([5]);
-});
+        document.body.innerHTML =
+            '< container > ' +
+            '<div id="screen"></div>' +
+            '<div id="operators"></div>' +
+            '<div id="numbers"></div>' +
+            '</container>';
 
-test('enter 3 digits number', () => {
+        const updateBuffer = require('../script');
 
-    document.body.innerHTML =
-        '< container > ' +
-        '<div id="screen"></div>' +
-        '<div id="operators"></div>' +
-        '<div id="numbers"></div>' +
-        '</container>';
+        let buffer = [];
+        buffer = updateBuffer(buffer, 5);
+        buffer = updateBuffer(buffer, 2);
+        buffer = updateBuffer(buffer, 9);
+        expect(buffer).toStrictEqual([529]);
+    });
 
-    const updateBuffer = require('../script');
+    test('add 2 numbers', () => {
 
-    let buffer = [];
-    buffer = updateBuffer(buffer, 5);
-    buffer = updateBuffer(buffer, 2);
-    buffer = updateBuffer(buffer, 9);
-    expect(buffer).toStrictEqual([529]);
-});
+        document.body.innerHTML =
+            '< container > ' +
+            '<div id="screen"></div>' +
+            '<div id="operators"></div>' +
+            '<div id="numbers"></div>' +
+            '</container>';
 
-test('add 2 numbers', () => {
+        const updateBuffer = require('../script');
 
-    document.body.innerHTML =
-        '< container > ' +
-        '<div id="screen"></div>' +
-        '<div id="operators"></div>' +
-        '<div id="numbers"></div>' +
-        '</container>';
+        let buffer = [];
+        buffer = updateBuffer(buffer, 5);
+        buffer = updateBuffer(buffer, 2);
+        buffer = updateBuffer(buffer, 9);
+        buffer = updateBuffer(buffer, "+");
+        buffer = updateBuffer(buffer, 7);
+        buffer = updateBuffer(buffer, 1);
+        buffer = updateBuffer(buffer, "=");
+        expect(buffer).toStrictEqual([600]);
+    });
 
-    const updateBuffer = require('../script');
+    test('add 3 numbers', () => {
 
-    let buffer = [];
-    buffer = updateBuffer(buffer, 5);
-    buffer = updateBuffer(buffer, 2);
-    buffer = updateBuffer(buffer, 9);
-    buffer = updateBuffer(buffer, "+");
-    buffer = updateBuffer(buffer, 7);
-    buffer = updateBuffer(buffer, 1);
-    buffer = updateBuffer(buffer, "=");
-    expect(buffer).toStrictEqual([600]);
-});
+        document.body.innerHTML =
+            '< container > ' +
+            '<div id="screen"></div>' +
+            '<div id="operators"></div>' +
+            '<div id="numbers"></div>' +
+            '</container>';
 
-test('add 3 numbers', () => {
+        const updateBuffer = require('../script');
 
-    document.body.innerHTML =
-        '< container > ' +
-        '<div id="screen"></div>' +
-        '<div id="operators"></div>' +
-        '<div id="numbers"></div>' +
-        '</container>';
+        let buffer = [];
+        buffer = updateBuffer(buffer, 5);
+        buffer = updateBuffer(buffer, 2);
+        buffer = updateBuffer(buffer, 9);
+        buffer = updateBuffer(buffer, "+");
+        buffer = updateBuffer(buffer, 7);
+        buffer = updateBuffer(buffer, 1);
+        buffer = updateBuffer(buffer, "+");
+        buffer = updateBuffer(buffer, 3);
+        buffer = updateBuffer(buffer, 1);
+        buffer = updateBuffer(buffer, "=");
+        expect(buffer).toStrictEqual([631]);
+    });
 
-    const updateBuffer = require('../script');
+    test('double sign +', () => {
 
-    let buffer = [];
-    buffer = updateBuffer(buffer, 5);
-    buffer = updateBuffer(buffer, 2);
-    buffer = updateBuffer(buffer, 9);
-    buffer = updateBuffer(buffer, "+");
-    buffer = updateBuffer(buffer, 7);
-    buffer = updateBuffer(buffer, 1);
-    buffer = updateBuffer(buffer, "+");
-    buffer = updateBuffer(buffer, 3);
-    buffer = updateBuffer(buffer, 1);
-    buffer = updateBuffer(buffer, "=");
-    expect(buffer).toStrictEqual([631]);
-});
+        document.body.innerHTML =
+            '< container > ' +
+            '<div id="screen"></div>' +
+            '<div id="operators"></div>' +
+            '<div id="numbers"></div>' +
+            '</container>';
 
-test('double sign +', () => {
+        const updateBuffer = require('../script');
 
-    document.body.innerHTML =
-        '< container > ' +
-        '<div id="screen"></div>' +
-        '<div id="operators"></div>' +
-        '<div id="numbers"></div>' +
-        '</container>';
+        let buffer = [];
+        buffer = updateBuffer(buffer, 5);
+        buffer = updateBuffer(buffer, 2);
+        buffer = updateBuffer(buffer, 9);
+        buffer = updateBuffer(buffer, "+");
+        buffer = updateBuffer(buffer, "+");
+        buffer = updateBuffer(buffer, 7);
+        buffer = updateBuffer(buffer, 1);
+        buffer = updateBuffer(buffer, "=");
+        expect(buffer).toStrictEqual([600]);
+    });
 
-    const updateBuffer = require('../script');
+    test('Addition / Multiplication order', () => {
 
-    let buffer = [];
-    buffer = updateBuffer(buffer, 5);
-    buffer = updateBuffer(buffer, 2);
-    buffer = updateBuffer(buffer, 9);
-    buffer = updateBuffer(buffer, "+");
-    buffer = updateBuffer(buffer, "+");
-    buffer = updateBuffer(buffer, 7);
-    buffer = updateBuffer(buffer, 1);
-    buffer = updateBuffer(buffer, "=");
-    expect(buffer).toStrictEqual([600]);
-});
+        document.body.innerHTML =
+            '< container > ' +
+            '<div id="screen"></div>' +
+            '<div id="operators"></div>' +
+            '<div id="numbers"></div>' +
+            '</container>';
 
-test('Addition / Multiplication order', () => {
+        const updateBuffer = require('../script');
 
-    document.body.innerHTML =
-        '< container > ' +
-        '<div id="screen"></div>' +
-        '<div id="operators"></div>' +
-        '<div id="numbers"></div>' +
-        '</container>';
+        let buffer = [];
+        buffer = updateBuffer(buffer, 5);
+        buffer = updateBuffer(buffer, 2);
+        buffer = updateBuffer(buffer, "*");
+        buffer = updateBuffer(buffer, 7);
+        buffer = updateBuffer(buffer, "+");
+        buffer = updateBuffer(buffer, 2);
+        buffer = updateBuffer(buffer, "=");
+        expect(buffer).toStrictEqual([366]);
+    });
 
-    const updateBuffer = require('../script');
+    test('Addition / Multiplication order - Multiple', () => {
 
-    let buffer = [];
-    buffer = updateBuffer(buffer, 5);
-    buffer = updateBuffer(buffer, 2);
-    buffer = updateBuffer(buffer, "*");
-    buffer = updateBuffer(buffer, 7);
-    buffer = updateBuffer(buffer, "+");
-    buffer = updateBuffer(buffer, 2);
-    buffer = updateBuffer(buffer, "=");
-    expect(buffer).toStrictEqual([366]);
-});
+        document.body.innerHTML =
+            '< container > ' +
+            '<div id="screen"></div>' +
+            '<div id="operators"></div>' +
+            '<div id="numbers"></div>' +
+            '</container>';
 
-test('Addition / Multiplication order - Multiple', () => {
+        const updateBuffer = require('../script');
 
-    document.body.innerHTML =
-        '< container > ' +
-        '<div id="screen"></div>' +
-        '<div id="operators"></div>' +
-        '<div id="numbers"></div>' +
-        '</container>';
+        let buffer = [];
+        buffer = updateBuffer(buffer, 5);
+        buffer = updateBuffer(buffer, 2);
+        buffer = updateBuffer(buffer, "*");
+        buffer = updateBuffer(buffer, 7);
+        buffer = updateBuffer(buffer, "+");
+        buffer = updateBuffer(buffer, 2);
+        buffer = updateBuffer(buffer, "/");
+        buffer = updateBuffer(buffer, 2);
+        buffer = updateBuffer(buffer, "*");
+        buffer = updateBuffer(buffer, 7);
+        buffer = updateBuffer(buffer, 7);
+        buffer = updateBuffer(buffer, "+");
+        buffer = updateBuffer(buffer, 2);
+        buffer = updateBuffer(buffer, "/");
+        buffer = updateBuffer(buffer, 3);
+        buffer = updateBuffer(buffer, "=");
+        expect(buffer).toStrictEqual([441.6666666666667]);
+    });
 
-    const updateBuffer = require('../script');
+    test('= after only 1 element', () => {
 
-    let buffer = [];
-    buffer = updateBuffer(buffer, 5);
-    buffer = updateBuffer(buffer, 2);
-    buffer = updateBuffer(buffer, "*");
-    buffer = updateBuffer(buffer, 7);
-    buffer = updateBuffer(buffer, "+");
-    buffer = updateBuffer(buffer, 2);
-    buffer = updateBuffer(buffer, "/");
-    buffer = updateBuffer(buffer, 2);
-    buffer = updateBuffer(buffer, "*");
-    buffer = updateBuffer(buffer, 7);
-    buffer = updateBuffer(buffer, 7);
-    buffer = updateBuffer(buffer, "+");
-    buffer = updateBuffer(buffer, 2);
-    buffer = updateBuffer(buffer, "/");
-    buffer = updateBuffer(buffer, 3);
-    buffer = updateBuffer(buffer, "=");
-    expect(buffer).toStrictEqual([441.6666666666667]);
-});
+        document.body.innerHTML =
+            '< container > ' +
+            '<div id="screen"></div>' +
+            '<div id="operators"></div>' +
+            '<div id="numbers"></div>' +
+            '</container>';
 
-test('= after only 1 element', () => {
+        const updateBuffer = require('../script');
 
-    document.body.innerHTML =
-        '< container > ' +
-        '<div id="screen"></div>' +
-        '<div id="operators"></div>' +
-        '<div id="numbers"></div>' +
-        '</container>';
+        let buffer = [];
+        buffer = updateBuffer(buffer, 5);
+        buffer = updateBuffer(buffer, 2);
+        buffer = updateBuffer(buffer, "=");
+        expect(buffer).toStrictEqual([52]);
+    });
 
-    const updateBuffer = require('../script');
+    test('Div by 0 should not error', () => {
 
-    let buffer = [];
-    buffer = updateBuffer(buffer, 5);
-    buffer = updateBuffer(buffer, 2);
-    buffer = updateBuffer(buffer, "=");
-    expect(buffer).toStrictEqual([52]);
-});
+        document.body.innerHTML =
+            '< container > ' +
+            '<div id="screen"></div>' +
+            '<div id="operators"></div>' +
+            '<div id="numbers"></div>' +
+            '</container>';
 
-test('Div by 0 should not error', () => {
+        const updateBuffer = require('../script');
 
-    document.body.innerHTML =
-        '< container > ' +
-        '<div id="screen"></div>' +
-        '<div id="operators"></div>' +
-        '<div id="numbers"></div>' +
-        '</container>';
+        let buffer = [];
+        buffer = updateBuffer(buffer, 5);
+        buffer = updateBuffer(buffer, 2);
+        buffer = updateBuffer(buffer, "/");
+        buffer = updateBuffer(buffer, 0);
+        buffer = updateBuffer(buffer, "=");
+        expect(buffer).toStrictEqual(["NaN"]);
+    });
 
-    const updateBuffer = require('../script');
+    test('Start with negative sign', () => {
 
-    let buffer = [];
-    buffer = updateBuffer(buffer, 5);
-    buffer = updateBuffer(buffer, 2);
-    buffer = updateBuffer(buffer, "/");
-    buffer = updateBuffer(buffer, 0);
-    buffer = updateBuffer(buffer, "=");
-    expect(buffer).toStrictEqual(["NaN"]);
-});
+        document.body.innerHTML =
+            '< container > ' +
+            '<div id="screen"></div>' +
+            '<div id="operators"></div>' +
+            '<div id="numbers"></div>' +
+            '</container>';
 
-test('Start with negative sign', () => {
+        const updateBuffer = require('../script');
 
-    document.body.innerHTML =
-        '< container > ' +
-        '<div id="screen"></div>' +
-        '<div id="operators"></div>' +
-        '<div id="numbers"></div>' +
-        '</container>';
+        let buffer = [];
+        buffer = updateBuffer(buffer, "-");
+        buffer = updateBuffer(buffer, 2);
+        buffer = updateBuffer(buffer, "+");
+        buffer = updateBuffer(buffer, 5);
+        buffer = updateBuffer(buffer, "=");
+        expect(buffer).toStrictEqual([3]);
+    });
 
-    const updateBuffer = require('../script');
+    test('All operators usage', () => {
 
-    let buffer = [];
-    buffer = updateBuffer(buffer, "-");
-    buffer = updateBuffer(buffer, 2);
-    buffer = updateBuffer(buffer, "+");
-    buffer = updateBuffer(buffer, 5);
-    buffer = updateBuffer(buffer, "=");
-    expect(buffer).toStrictEqual([3]);
-});
+        document.body.innerHTML =
+            '< container > ' +
+            '<div id="screen"></div>' +
+            '<div id="operators"></div>' +
+            '<div id="numbers"></div>' +
+            '</container>';
 
-test('All operators usage', () => {
+        const updateBuffer = require('../script');
 
-    document.body.innerHTML =
-        '< container > ' +
-        '<div id="screen"></div>' +
-        '<div id="operators"></div>' +
-        '<div id="numbers"></div>' +
-        '</container>';
-
-    const updateBuffer = require('../script');
-
-    let buffer = [];
-    buffer = updateBuffer(buffer, "-");
-    buffer = updateBuffer(buffer, 2);
-    buffer = updateBuffer(buffer, "+");
-    buffer = updateBuffer(buffer, 5);
-    buffer = updateBuffer(buffer, "*");
-    buffer = updateBuffer(buffer, 3);
-    buffer = updateBuffer(buffer, "-");
-    buffer = updateBuffer(buffer, 5);
-    buffer = updateBuffer(buffer, "/");
-    buffer = updateBuffer(buffer, 2);
-    buffer = updateBuffer(buffer, "=");
-    expect(buffer).toStrictEqual([10.5]);
+        let buffer = [];
+        buffer = updateBuffer(buffer, "-");
+        buffer = updateBuffer(buffer, 2);
+        buffer = updateBuffer(buffer, "+");
+        buffer = updateBuffer(buffer, 5);
+        buffer = updateBuffer(buffer, "*");
+        buffer = updateBuffer(buffer, 3);
+        buffer = updateBuffer(buffer, "-");
+        buffer = updateBuffer(buffer, 5);
+        buffer = updateBuffer(buffer, "/");
+        buffer = updateBuffer(buffer, 2);
+        buffer = updateBuffer(buffer, "=");
+        expect(buffer).toStrictEqual([10.5]);
+    });
 });
