@@ -2,7 +2,6 @@ import Buffer from './Buffer.js';
 //const Buffer = require('../Buffer');
 
 const buffer = new Buffer();
-const operators = ["+", "-", "*", "/", "="];
 
 createButtons();
 addEventListenerKeyboard();
@@ -11,10 +10,10 @@ function createButtons() {
     const operatorsUI = document.getElementById("operators");
     for (let i = 0; i < 5; i++) {
         let button = document.createElement("button");
-        button.innerText = operators[i];
+        button.innerText = buffer.operators[i];
         button.addEventListener('click', (e) => {
             e.stopPropagation();
-            buffer.update(operators[i]);
+            buffer.update(buffer.operators[i]);
             updateScreen(buffer);
         });
         operatorsUI.appendChild(button);
