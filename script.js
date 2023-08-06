@@ -62,6 +62,7 @@ function addEventListenerKeyboard() {
             return;
         }
         buffer.update(keyPressed);
+        updateScreen(buffer);
     });
 }
 
