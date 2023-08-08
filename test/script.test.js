@@ -143,4 +143,17 @@ describe("Buffer", () => {
         expect(buffer.buffer).toStrictEqual([10.5]);
         buffer.clear();
     });
+
+    test('Start with a -', () => {
+
+        buffer.update("-");
+        buffer.update(2);
+        buffer.update(5);
+        buffer.update("*");
+        buffer.update(3);
+        buffer.update("=");
+        expect(buffer.buffer).toStrictEqual([-75]);
+        buffer.clear();
+    });
+
 });

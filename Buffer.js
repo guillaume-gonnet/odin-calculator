@@ -42,7 +42,7 @@ export default class Buffer {
 
         if (typeof el === "number") {
             if (typeof this.lastElement === "number") {
-                this.replaceLastElement(this.lastElement * 10 + el);
+                this.replaceLastElement(this.lastElement < 0 ? this.lastElement * 10 - el : this.lastElement * 10 + el);
             } else if (this.lastElement === "-" && this.length === 1) {
                 this.replaceLastElement(-el);
             } else {
