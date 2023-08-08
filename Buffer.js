@@ -4,6 +4,7 @@ export default class Buffer {
         this.buffer = [];
         this.operators = ["+", "-", "*", "/", "="];
     }
+    static lastOp = null;
     get lastElement() {
         if (this.buffer.length === 0) {
             throw new Error('Empty buffer, no last element')
@@ -22,6 +23,7 @@ export default class Buffer {
     }
     clear() {
         this.buffer = [];
+        Buffer.lastOp = null;
     }
     addElement = (el) => {
         this.buffer.push(el);
@@ -30,6 +32,7 @@ export default class Buffer {
         this.buffer.splice(-1, 1, el);
     }
     update(el) {
+
         if (this.buffer.length === 0) {
             if (typeof el === "number" || el === "-") {
                 this.addElement(el);
@@ -47,11 +50,13 @@ export default class Buffer {
             }
             return;
         } else if (el === "=") {
+            //start with priority 1 operators
             while (this.buffer.includes("*") || this.buffer.includes("/")) {
                 const index = Math.max(this.buffer.indexOf("*"), this.buffer.indexOf("/"));
                 const newEl = operate(this.buffer[index - 1], this.buffer[index], this.buffer[index + 1]);
                 this.buffer.splice(index - 1, 3, newEl);
             }
+            //then with priorty 2 operators
             while (this.length !== 1) {
                 this.buffer.splice(-3, 3, operate(this.buffer.at(-3), this.buffer.at(-2), this.buffer.at(-1)));
             }
@@ -59,8 +64,34 @@ export default class Buffer {
         } else { // el is an operator
             if (this.operators.includes(this.lastElement)) { //2operators in a row, keep last
                 this.replaceLastElement(el);
+                return;
+            }
+            if (Buffer.lastOp === null) {
+                Buffer.lastOp = el;
+                this.addElement(el);
+                return;
+            }
+            if (getPriority(el) === getPriority(Buffer.lastOp)) { // execute only 1 ope
+                this.buffer.splice(-3, 3, operate(this.buffer.at(-3), this.buffer.at(-2), this.buffer.at(-1)));
+                this.addElement(el);
+                return;
+            } else if (getPriority(el) > getPriority(Buffer.lastOp)) { //execute all before (because only 2 priorities)
+                while (this.buffer.includes("*") || this.buffer.includes("/")) {
+                    const index = Math.max(this.buffer.indexOf("*"), this.buffer.indexOf("/"));
+                    const newEl = operate(this.buffer[index - 1], this.buffer[index], this.buffer[index + 1]);
+                    this.buffer.splice(index - 1, 3, newEl);
+                }
+                //then with priorty 2 operators
+                while (this.length !== 1) {
+                    this.buffer.splice(-3, 3, operate(this.buffer.at(-3), this.buffer.at(-2), this.buffer.at(-1)));
+                }
+                this.addElement(el);
+                Buffer.lastOp = el;
+                return;
             } else {
                 this.addElement(el);
+                Buffer.lastOp = el;
+                return;
             }
         }
     }
@@ -78,6 +109,19 @@ function operate(a, ope, b) {
                 return "NaN";
             }
             return a / b;
+    }
+}
+
+function getPriority(ope) {
+    switch (ope) {
+        case "+":
+        case "-":
+            return 2;
+        case "*":
+        case "/":
+            return 1;
+        default:
+            console.log(`${ope} is not an operator`);
     }
 }
 
