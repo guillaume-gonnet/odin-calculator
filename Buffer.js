@@ -1,36 +1,49 @@
 export default class Buffer {
-    //module.exports = class Buffer {
     constructor() {
         this.buffer = [];
         this.operators = ["+", "-", "*", "/", "="];
     }
+
     static lastOp = null;
+
     get lastElement() {
         if (this.buffer.length === 0) {
             throw new Error('Empty buffer, no last element')
         }
         return this.buffer.at(-1);
     }
+
     get length() {
         return this.buffer.length;
     }
+
     get lastNumber() {
+        if (this.buffer.length === 0) {
+            return 0;
+        }
         for (let i = this.buffer.length - 1; i >= 0; i--) {
             if (typeof this.buffer[i] === "number")
                 return this.buffer[i];
         }
-        return 0;
     }
+
     clear() {
         this.buffer = [];
         Buffer.lastOp = null;
     }
+
     addElement = (el) => {
         this.buffer.push(el);
     }
+
     replaceLastElement(el) {
         this.buffer.splice(-1, 1, el);
     }
+
+    deleteLastElement() {
+        this.buffer.pop();
+    }
+
     update(el) {
 
         if (this.buffer.length === 0) {
@@ -63,6 +76,7 @@ export default class Buffer {
             while (this.length !== 1) {
                 this.buffer.splice(-3, 3, operate(this.buffer.at(-3), this.buffer.at(-2), this.buffer.at(-1)));
             }
+            Buffer.lastOp = null;
             return;
         } else { // el is an operator
             if (this.operators.includes(this.lastElement)) { //2operators in a row, keep last
@@ -99,6 +113,7 @@ export default class Buffer {
         }
     }
 }
+
 function operate(a, ope, b) {
     switch (ope) {
         case "+":
@@ -127,5 +142,3 @@ function getPriority(ope) {
             console.log(`${ope} is not an operator`);
     }
 }
-
-//module.exports = { Buffer };

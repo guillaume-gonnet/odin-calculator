@@ -1,5 +1,4 @@
 import Buffer from './Buffer.js';
-//const Buffer = require('../Buffer');
 
 const buffer = new Buffer();
 
@@ -15,18 +14,31 @@ function createButtons() {
             e.stopPropagation();
             buffer.update(buffer.operators[i]);
             updateScreen(buffer);
+            buttonDel.disabled = false;
         });
         operatorsUI.appendChild(button);
     }
 
-    let button = document.createElement("button");
-    button.innerText = "AC";
-    button.addEventListener('click', (e) => {
+    let buttonAC = document.createElement("button");
+    buttonAC.innerText = "AC";
+    buttonAC.addEventListener('click', (e) => {
         e.stopPropagation();
         buffer.clear();
         updateScreen(buffer);
+        buttonDel.disabled = true;
     });
-    operatorsUI.appendChild(button);
+    operatorsUI.appendChild(buttonAC);
+
+    let buttonDel = document.createElement("button");
+    buttonDel.innerText = "Del";
+    buttonDel.disabled = true;
+    buttonDel.addEventListener('click', (e) => {
+        e.stopPropagation();
+        buffer.deleteLastElement();
+        buttonDel.disabled = true;
+        updateScreen(buffer);
+    });
+    operatorsUI.appendChild(buttonDel);
 
 
     const numbersUI = document.getElementById("numbers");
@@ -38,6 +50,7 @@ function createButtons() {
             e.stopPropagation();
             buffer.update(i);
             updateScreen(buffer);
+            buttonDel.disabled = false;
         });
         numbersUI.appendChild(button);
     }

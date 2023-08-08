@@ -1,4 +1,3 @@
-//const Buffer = require('../Buffer');
 import Buffer from '../Buffer.js';
 
 describe("Buffer", () => {
