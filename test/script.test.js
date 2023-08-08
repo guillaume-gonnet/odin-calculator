@@ -145,7 +145,6 @@ describe("Buffer", () => {
     });
 
     test('Start with a -', () => {
-
         buffer.update("-");
         buffer.update(2);
         buffer.update(5);
@@ -156,4 +155,23 @@ describe("Buffer", () => {
         buffer.clear();
     });
 
+    test('Operator directly followed by =', () => {
+        buffer.update(2);
+        buffer.update("*");
+        buffer.update("=");
+        expect(buffer.buffer).toStrictEqual([4]);
+        buffer.clear();
+    });
+
+    test('Operator directly followed by = with several args', () => {
+        buffer.update("-");
+        buffer.update(2);
+        buffer.update(5);
+        buffer.update("*");
+        buffer.update(3);
+        buffer.update("*");
+        buffer.update("=");
+        expect(buffer.buffer).toStrictEqual([5625]);
+        buffer.clear();
+    });
 });

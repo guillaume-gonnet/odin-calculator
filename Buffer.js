@@ -50,6 +50,9 @@ export default class Buffer {
             }
             return;
         } else if (el === "=") {
+            if (this.operators.includes(this.lastElement)) {
+                this.addElement(this.buffer.at(-2));
+            }
             //start with priority 1 operators
             while (this.buffer.includes("*") || this.buffer.includes("/")) {
                 const index = Math.max(this.buffer.indexOf("*"), this.buffer.indexOf("/"));
