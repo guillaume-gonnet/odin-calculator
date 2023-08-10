@@ -1,7 +1,7 @@
 export default class Buffer {
     constructor() {
         this.buffer = [];
-        this.operators = ["+", "-", "*", "/", "="];
+        this.operators = ["+", "-", "*", "/"];
     }
 
     static lastOp = null;

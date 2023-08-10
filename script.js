@@ -6,19 +6,23 @@ createButtons();
 addEventListenerKeyboard();
 
 function createButtons() {
-    const operatorsUI = document.getElementById("operators");
-    for (let i = 0; i < 5; i++) {
+    const operatorsUI = document.getElementById("btn-operators");
+    for (let i = 0; i < 4; i++) {
         let button = document.createElement("button");
         button.innerText = buffer.operators[i];
+        button.setAttribute("id", `btn${i}`);
         button.addEventListener('click', (e) => {
             e.stopPropagation();
             buffer.update(buffer.operators[i]);
             updateScreen(buffer);
             buttonDel.disabled = false;
         });
+        button.classList.add("button");
+        button.classList.add("btn-operator");
         operatorsUI.appendChild(button);
     }
 
+    const othersUI = document.getElementById("btn-others");
     let buttonAC = document.createElement("button");
     buttonAC.innerText = "AC";
     buttonAC.addEventListener('click', (e) => {
@@ -27,7 +31,9 @@ function createButtons() {
         updateScreen(buffer);
         buttonDel.disabled = true;
     });
-    operatorsUI.appendChild(buttonAC);
+    buttonAC.classList.add("button");
+    buttonAC.classList.add("btn-other");
+    othersUI.appendChild(buttonAC);
 
     let buttonDel = document.createElement("button");
     buttonDel.innerText = "Del";
@@ -38,11 +44,12 @@ function createButtons() {
         buttonDel.disabled = true;
         updateScreen(buffer);
     });
-    operatorsUI.appendChild(buttonDel);
+    buttonDel.classList.add("button");
+    buttonDel.classList.add("btn-other");
+    othersUI.appendChild(buttonDel);
 
-
-    const numbersUI = document.getElementById("numbers");
-    for (let i = 0; i < 10; i++) {
+    const numbersUI = document.getElementById("btn-numbers");
+    for (let i = 9; i >= 0; i--) {
         let button = document.createElement("button");
         button.innerText = i;
         button.setAttribute("id", `btn${i}`);
@@ -52,8 +59,21 @@ function createButtons() {
             updateScreen(buffer);
             buttonDel.disabled = false;
         });
+        button.classList.add("button");
+        button.classList.add("btn-number");
         numbersUI.appendChild(button);
     }
+
+    let buttonEqual = document.createElement("button");
+    buttonEqual.innerText = "=";
+    buttonEqual.addEventListener('click', (e) => {
+        buffer.update("=");
+        updateScreen(buffer);
+        buttonDel.disabled = true;
+    });
+    buttonEqual.classList.add("button");
+    buttonEqual.classList.add("btn-equal");
+    numbersUI.appendChild(buttonEqual);
 }
 
 function addEventListenerKeyboard() {
