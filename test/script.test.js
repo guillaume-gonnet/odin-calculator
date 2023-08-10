@@ -1,4 +1,4 @@
-import Buffer from '../Buffer.js';
+import Buffer from '../src/Buffer.js';
 
 describe("Buffer", () => {
     const buffer = new Buffer();
