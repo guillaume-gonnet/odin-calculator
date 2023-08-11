@@ -102,5 +102,4 @@ function updateScreen(buffer) {
     const screen = document.getElementById("screen");
     let elToDisplay = buffer.lastNumber;
     screen.innerText = elToDisplay;
-
 }

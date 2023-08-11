@@ -18,13 +18,14 @@ export default class Buffer {
     }
 
     get lastNumber() {
-        if (this.buffer.length === 0) {
-            return 0;
+        if (this.buffer.length !== 0) {
+            for (let i = this.buffer.length - 1; i >= 0; i--) {
+                if (typeof this.buffer[i] === "number")
+                    return this.buffer[i];
+            }
         }
-        for (let i = this.buffer.length - 1; i >= 0; i--) {
-            if (typeof this.buffer[i] === "number")
-                return this.buffer[i];
-        }
+        return 0;
+
     }
 
     clear() {

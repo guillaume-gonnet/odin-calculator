@@ -1,6 +1,6 @@
 import Buffer from '../src/Buffer.js';
 
-describe("Buffer", () => {
+describe("Test update function", () => {
     const buffer = new Buffer();
 
     test('enter single digit number', () => {
@@ -172,5 +172,29 @@ describe("Buffer", () => {
         buffer.update("=");
         expect(buffer.buffer).toStrictEqual([5625]);
         buffer.clear();
+    });
+});
+
+describe("Test lastNumber", () => {
+    const buff = new Buffer();
+
+    test('2 operators at last', () => {
+        buff.buffer = [-5, 6, '+', '='];
+        expect(buff.lastNumber).toStrictEqual(6);
+    });
+
+    test('1 number at last', () => {
+        buff.buffer = [-5, 6, '+', '=', 4];
+        expect(buff.lastNumber).toStrictEqual(4);
+    });
+
+    test('empty buffer', () => {
+        buff.buffer = [];
+        expect(buff.lastNumber).toStrictEqual(0);
+    });
+
+    test('only operators', () => {
+        buff.buffer = ['*', '+', '='];
+        expect(buff.lastNumber).toStrictEqual(0);
     });
 });
