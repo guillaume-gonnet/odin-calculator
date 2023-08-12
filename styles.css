@@ -21,20 +21,19 @@
     min-height: 50px;
 }
 
+.btn-other {
+    flex: 1 0 calc(100% / 2 - 4px);
+    background-color: rgb(207, 115, 115);
+}
+
+#numbers-ope {
+    display: flex;
+}
+
 #btn-numbers {
     display: flex;
     flex-flow: row-reverse wrap;
-    flex: 1 0 calc(100% / 4 *3 - 12px);
-}
-
-#btn-operators {
-    display: flex;
-    flex-basis: calc(100% / 4 *1 - 4px);
-    flex-direction: column;
-}
-
-#btn-others {
-    display: flex;
+    flex: 1 0 calc(100% / 4 *3 - 6px);
 }
 
 .btn-number {
@@ -42,20 +41,21 @@
     background-color: bisque;
 }
 
-.btn-equal {
-    flex: 1 0 calc(100% /3 *2 - 4px);
-    background-color: burlywood;
+#btn-operators {
+    display: flex;
+    flex: 1 0 calc(100% / 4 *1 - 2px);
+    flex-direction: column;
 }
 
 .btn-operator {
     background-color: rgb(170, 139, 86);
 }
 
-.btn-other {
-    flex-basis: calc(100% / 2 - 0px);
-    background-color: rgb(207, 115, 115);
+#btn-others {
+    display: flex;
 }
 
-#numbers-ope {
-    display: flex;
+.btn-equal {
+    flex: 1 0 calc(100% /3 *2 - 4px);
+    background-color: burlywood;
 }
